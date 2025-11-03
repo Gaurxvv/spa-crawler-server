@@ -10,9 +10,9 @@ module.exports = {
       env: {
         NODE_ENV: "production",
         PORT: 3000,
-        BASE_URL: "https://yourdomain.com",
-        SITE_NAME: "Your Site Name",
-        API_URL: "https://api.yourdomain.com",
+        BASE_URL: "http://localhost:3000",
+        SITE_NAME: "Muscat Where To",
+        API_URL: "http://localhost:5000",
       },
     },
   ],

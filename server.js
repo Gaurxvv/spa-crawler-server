@@ -6,11 +6,6 @@ const { isbot } = require("isbot");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from React build
-app.use(express.static(path.join(__dirname, "build"), {
-  maxAge: "1d" // Cache static assets for 1 day
-}));
-
 // Global user agent list for debugging
 const knownBots = [
   "WhatsApp",
@@ -50,9 +45,9 @@ function escapeHtml(text) {
 // Function to generate meta tags for events
 async function getEventMetaTags(slug) {
   try {
-    // TODO: Replace with your actual API endpoint
-    const apiUrl = process.env.API_URL || "YOUR_API_ENDPOINT";
-    const response = await fetch(`${apiUrl}/events/${slug}`);
+    // API endpoint for fetching event data
+    const apiUrl = process.env.API_URL || "http://localhost:5000";
+    const response = await fetch(`${apiUrl}/api/v1/events/${slug}`);
     
     if (!response.ok) {
       throw new Error(`API returned ${response.status}`);
@@ -92,6 +87,22 @@ async function getEventMetaTags(slug) {
   }
 }
 
+// Helper function to fix absolute URLs for localhost
+function fixLocalhostUrls(html) {
+  // Replace absolute URLs with relative paths
+  // Pattern: href="https://muscatwhereto.com/path" → href="/path"
+  const before = html;
+  
+  // Replace all occurrences of the domain with relative paths
+  html = html.replace(/https:\/\/muscatwhereto\.com/g, '');
+  
+  if (before !== html) {
+    console.log('✅ URL rewriting applied');
+  }
+  
+  return html;
+}
+
 // Helper function to read and inject meta tags into HTML
 function injectMetaTags(html, metaTags) {
   // Remove any existing dynamic meta tags between <!-- Dynamic --> comments
@@ -118,10 +129,10 @@ app.get("/events/:slug", async (req, res) => {
   }
 
   if (isBot) {
+    const htmlFile = path.join(__dirname, "build", "index.html");
+    
     try {
       // Read the base HTML file
-      const htmlFile = path.join(__dirname, "build", "index.html");
-      
       if (!fs.existsSync(htmlFile)) {
         console.error("❌ index.html not found in build directory");
         return res.status(500).send("Server configuration error");
@@ -134,6 +145,9 @@ app.get("/events/:slug", async (req, res) => {
 
       // Inject meta tags into HTML
       html = injectMetaTags(html, metaTags);
+      
+      // Fix URLs for localhost
+      html = fixLocalhostUrls(html);
 
       // Set proper headers for SEO
       res.setHeader("Content-Type", "text/html; charset=utf-8");
@@ -142,12 +156,18 @@ app.get("/events/:slug", async (req, res) => {
       res.send(html);
     } catch (error) {
       console.error("❌ Error serving bot content:", error);
-      // Fallback to regular index.html
-      res.sendFile(path.join(__dirname, "build", "index.html"));
+      // Fallback to regular index.html with URL fix
+      let html = fs.readFileSync(htmlFile, "utf8");
+      html = fixLocalhostUrls(html);
+      res.send(html);
     }
   } else {
     // Serve regular React app for human users
-    res.sendFile(path.join(__dirname, "build", "index.html"));
+    // Read HTML and fix URLs for localhost
+    const htmlFile = path.join(__dirname, "build", "index.html");
+    let html = fs.readFileSync(htmlFile, "utf8");
+    html = fixLocalhostUrls(html);
+    res.send(html);
   }
 });
 
@@ -165,8 +185,17 @@ app.get("/events/:slug", async (req, res) => {
 
 // Catch-all handler for React Router (must be last)
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  const htmlFile = path.join(__dirname, "build", "index.html");
+  let html = fs.readFileSync(htmlFile, "utf8");
+  html = fixLocalhostUrls(html);
+  console.log(`📄 Serving ${req.url}`);
+  res.send(html);
 });
+
+// Serve static files from React build (AFTER routes to allow HTML rewriting)
+app.use(express.static(path.join(__dirname, "build"), {
+  maxAge: "1d" // Cache static assets for 1 day
+}));
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);

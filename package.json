@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node test-bot-detection.js",
+    "test:server": "node test-server.js",
     "dev": "node server.js",
     "check": "node check-setup.js"
   },
