@@ -1,0 +1,20 @@
+{
+  "name": "spa-crawler-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.21.2",
+    "isbot": "^5.1.31"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test-bot-detection.js",
+    "dev": "node server.js",
+    "check": "node check-setup.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
