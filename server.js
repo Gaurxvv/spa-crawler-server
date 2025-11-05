@@ -42,38 +42,70 @@ function escapeHtml(text) {
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
+// Strip HTML tags to plain text (for safe descriptions)
+function stripHtml(html) {
+  if (!html) return "";
+  return String(html).replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim();
+}
+
 // Function to generate meta tags for events
 async function getEventMetaTags(slug) {
   try {
     // API endpoint for fetching event data
-    const apiUrl = process.env.API_URL || "http://localhost:5000";
-    const response = await fetch(`${apiUrl}/api/v1/events/${slug}`);
+    const apiUrl = process.env.API_URL || "https://muscatwhereto.com";
+    // Use the user eventDetails endpoint provided
+    const requestUrl = `${apiUrl}/api/v1/user/eventDetails/${slug}`;
+    console.log(`🔎 Fetching event details from: ${requestUrl}`);
+    const response = await fetch(requestUrl, {
+      headers: { Accept: "application/json" },
+    });
+    console.log(`🌐 API status: ${response.status}`);
+    if (!response.ok) {
+      const errorBody = await response.text().catch(() => "<non-json body>");
+      console.error("⚠️ API non-OK response", { status: response.status, bodySnippet: errorBody?.slice(0, 300) });
+      throw new Error(`API returned ${response.status}`);
+    }
     
     if (!response.ok) {
       throw new Error(`API returned ${response.status}`);
     }
     
-    const event = await response.json();
+    const apiJson = await response.json().catch((e) => {
+      console.error("❌ Failed to parse JSON from API", e);
+      return null;
+    });
+    if (!apiJson) {
+      throw new Error("Invalid JSON from API");
+    }
+    if (apiJson.success === false) {
+      console.error("⚠️ API success=false", apiJson);
+    }
+    // Support both legacy {title, description, image} and new {success, data.eventDetails}
+    const details = apiJson?.data?.eventDetails || apiJson;
+    const title = details?.title || "";
+    const description = details?.shortDescription || details?.description || details?.excerpt || "";
+    const descriptionText = stripHtml(description);
+    const image = details?.displayPhoto || details?.featuredPhoto || details?.image || details?.imageUrl || "";
     const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 
     return `
     <!-- Event-specific meta tags -->
-    <meta property="og:title" content="${escapeHtml(event.title)}" />
-    <meta property="og:description" content="${escapeHtml(event.description || event.excerpt || "")}" />
-    <meta property="og:image" content="${escapeHtml(event.image || event.imageUrl || "")}" />
+    <meta property="og:title" content="${escapeHtml(title)}" />
+    <meta property="og:description" content="${escapeHtml(descriptionText)}" />
+    <meta property="og:image" content="${escapeHtml(image)}" />
     <meta property="og:url" content="${escapeHtml(`${baseUrl}/events/${slug}`)}" />
     <meta property="og:type" content="event" />
     <meta property="og:site_name" content="${escapeHtml(process.env.SITE_NAME || "Your Site")}" />
     
     <!-- Twitter Card meta tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${escapeHtml(event.title)}" />
-    <meta name="twitter:description" content="${escapeHtml(event.description || event.excerpt || "")}" />
-    <meta name="twitter:image" content="${escapeHtml(event.image || event.imageUrl || "")}" />
+    <meta name="twitter:title" content="${escapeHtml(title)}" />
+    <meta name="twitter:description" content="${escapeHtml(descriptionText)}" />
+    <meta name="twitter:image" content="${escapeHtml(image)}" />
     
     <!-- Additional meta tags -->
-    <meta name="description" content="${escapeHtml(event.description || event.excerpt || "")}" />
-    <title>${escapeHtml(event.title)}</title>
+    <meta name="description" content="${escapeHtml(descriptionText)}" />
+    <title>${escapeHtml(title)}</title>
     `;
   } catch (error) {
     console.error("Error fetching event data:", error);
