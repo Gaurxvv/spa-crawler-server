@@ -93,11 +93,14 @@ function fixLocalhostUrls(html) {
   // Pattern: href="https://muscatwhereto.com/path" → href="/path"
   const before = html;
   
-  // Replace all occurrences of the domain with relative paths
-  html = html.replace(/https:\/\/muscatwhereto\.com/g, '');
+  // Replace all occurrences of the domain with relative paths (more comprehensive)
+  // Match both http and https, with or without trailing slash
+  html = html.replace(/https?:\/\/muscatwhereto\.com/gi, '');
+  // Also rewrite staging host asset URLs to relative paths
+  html = html.replace(/https?:\/\/mwtstaging\.cfd:3000/gi, '');
   
   if (before !== html) {
-    console.log('✅ URL rewriting applied');
+    console.log('✅ URL rewriting applied - converted absolute URLs to relative paths');
   }
   
   return html;
@@ -116,6 +119,16 @@ function injectMetaTags(html, metaTags) {
   
   return html;
 }
+
+// Root route handler - must come before static middleware
+app.get("/", (req, res) => {
+  const htmlFile = path.join(__dirname, "build", "index.html");
+  let html = fs.readFileSync(htmlFile, "utf8");
+  html = fixLocalhostUrls(html);
+  console.log(`📄 Serving HTML for root route`);
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.send(html);
+});
 
 // Route handler for events with bot detection
 app.get("/events/:slug", async (req, res) => {
@@ -183,19 +196,66 @@ app.get("/events/:slug", async (req, res) => {
 //   }
 // });
 
-// Catch-all handler for React Router (must be last)
+// Middleware: Rewrite API host inside served JS bundles to avoid CORS during local dev
+// This replaces absolute calls to mwtstaging.cfd:5000 with localhost:5000
+// MUST come before catch-all route and static middleware
+app.get(/.*\.js$/, (req, res, next) => {
+  const filePath = path.join(__dirname, "build", req.path);
+  if (!fs.existsSync(filePath)) return next();
+
+  try {
+    let content = fs.readFileSync(filePath, "utf8");
+    const before = content;
+
+    content = content.replace(/https?:\/\/mwtstaging\.cfd:5000/g, "http://localhost:5000");
+
+    if (before !== content) {
+      console.log(`✅ API host rewriting applied for ${req.path}`);
+    }
+
+    res.setHeader("Content-Type", "application/javascript; charset=utf-8");
+    res.setHeader("Cache-Control", "no-cache");
+    return res.send(content);
+  } catch (err) {
+    console.error("Error rewriting JS asset:", err);
+    return next();
+  }
+});
+
+// Handle CSS files explicitly to ensure proper MIME type
+app.get(/.*\.css$/, (req, res, next) => {
+  const filePath = path.join(__dirname, "build", req.path);
+  if (!fs.existsSync(filePath)) return next();
+  
+  res.setHeader("Content-Type", "text/css; charset=utf-8");
+  res.sendFile(filePath);
+});
+
+// Serve static files from React build (AFTER dynamic handlers to allow rewriting, BEFORE catch-all)
+// Don't serve index.html automatically - let our route handlers handle it
+app.use(express.static(path.join(__dirname, "build"), {
+  maxAge: "1d", // Cache static assets for 1 day
+  index: false // Don't automatically serve index.html
+}));
+
+// Catch-all handler for React Router (MUST be last - after all static file handlers)
 app.get("*", (req, res) => {
+  // Skip if this is a static file request (should be handled by express.static)
+  const staticExtensions = ['.js', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot', '.json', '.map'];
+  const ext = path.extname(req.path).toLowerCase();
+  if (staticExtensions.includes(ext)) {
+    // This shouldn't happen if routes are ordered correctly, but log if it does
+    console.warn(`⚠️ Static file ${req.path} reached catch-all route`);
+    return res.status(404).send('File not found');
+  }
+  
   const htmlFile = path.join(__dirname, "build", "index.html");
   let html = fs.readFileSync(htmlFile, "utf8");
   html = fixLocalhostUrls(html);
-  console.log(`📄 Serving ${req.url}`);
+  console.log(`📄 Serving HTML for ${req.url}`);
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.send(html);
 });
-
-// Serve static files from React build (AFTER routes to allow HTML rewriting)
-app.use(express.static(path.join(__dirname, "build"), {
-  maxAge: "1d" // Cache static assets for 1 day
-}));
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
