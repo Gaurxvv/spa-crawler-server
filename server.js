@@ -52,7 +52,7 @@ function stripHtml(html) {
 async function getEventMetaTags(slug) {
   try {
     // API endpoint for fetching event data
-    const apiUrl = process.env.API_URL || "https://muscatwhereto.com";
+    const apiUrl = "https://muscatwhereto.com";
     // Use the user eventDetails endpoint provided
     const requestUrl = `${apiUrl}/api/v1/user/eventDetails/${slug}`;
     console.log(`🔎 Fetching event details from: ${requestUrl}`);
@@ -86,7 +86,7 @@ async function getEventMetaTags(slug) {
     const description = details?.shortDescription || details?.description || details?.excerpt || "";
     const descriptionText = stripHtml(description);
     const image = details?.displayPhoto || details?.featuredPhoto || details?.image || details?.imageUrl || "";
-    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+    const baseUrl = "https://muscatwhereto.com";
 
     return `
     <!-- Event-specific meta tags -->
