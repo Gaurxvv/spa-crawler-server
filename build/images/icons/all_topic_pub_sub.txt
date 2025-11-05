@@ -1,0 +1,249 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6664
+load:0x40078000,len:14848
+load:0x40080400,len:3804
+entry 0x40080698
+[0;32mI (27) boot: ESP-IDF v4.4.2-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 15:03:39[0m
+[0;32mI (27) boot: chip revision: 3[0m
+[0;32mI (31) boot_comm: chip revision: 3, min. bootloader chip revision: 1[0m
+[0;32mI (38) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (42) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (51) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (60) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (68) boot:  0 nvs              WiFi data        01 02 00009000 00004000[0m
+[0;32mI (75) boot:  1 otadata          OTA data         01 00 0000d000 00002000[0m
+[0;32mI (83) boot:  2 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (90) boot:  3 ota_0            OTA app          00 10 00010000 001a0000[0m
+[0;32mI (98) boot:  4 ota_1            OTA app          00 11 001b0000 001a0000[0m
+[0;32mI (105) boot:  5 storage          Unknown data     01 82 00350000 000b0000[0m
+[0;32mI (113) boot: End of partition table[0m
+[0;32mI (117) boot_comm: chip revision: 3, min. application chip revision: 1[0m
+[0;32mI (124) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=28450h (164944) map[0m
+[0;32mI (192) esp_image: segment 1: paddr=00038478 vaddr=3ffb0000 size=03d74h ( 15732) load[0m
+[0;32mI (199) esp_image: segment 2: paddr=0003c1f4 vaddr=40080000 size=03e24h ( 15908) load[0m
+[0;32mI (206) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=aaf58h (700248) map[0m
+[0;32mI (460) esp_image: segment 4: paddr=000eaf80 vaddr=40083e24 size=12dd8h ( 77272) load[0m
+[0;32mI (492) esp_image: segment 5: paddr=000fdd60 vaddr=50000000 size=00010h (    16) load[0m
+[0;32mI (503) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (503) boot: Disabling RNG early entropy source...[0m
+[0;32mI (515) cpu_start: Pro cpu up.[0m
+[0;32mI (515) cpu_start: Starting app cpu, entry point is 0x40081434[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (531) cpu_start: Pro cpu start user code[0m
+[0;32mI (531) cpu_start: cpu freq: 240000000[0m
+[0;32mI (531) cpu_start: Application information:[0m
+[0;32mI (536) cpu_start: Project name:     main[0m
+[0;32mI (541) cpu_start: App version:      2c6d4fa-dirty[0m
+[0;32mI (546) cpu_start: Compile time:     Oct 23 2023 17:45:47[0m
+[0;32mI (552) cpu_start: ELF file SHA256:  d2ea6cb27af4880d...[0m
+[0;32mI (558) cpu_start: ESP-IDF:          v4.4.2-dirty[0m
+[0;32mI (564) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (571) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (577) heap_init: At 3FFB8EC0 len 00027140 (156 KiB): DRAM[0m
+[0;32mI (583) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (589) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (596) heap_init: At 40096BFC len 00009404 (37 KiB): IRAM[0m
+[0;32mI (603) spi_flash: detected chip: generic[0m
+[0;32mI (607) spi_flash: flash io: dio[0m
+[0;32mI (613) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (3[0;32mI (534) uart: queue free spaces: 20[0m
+[0;32mI (535) uart: queue free spaces: 20[0m
+Setup done
+[MAIN]:402:SPIFFS mounted successfully
+Reading file: /save_flag_path.txt
+{"ave_val_flag":false,"emr_val_flag":false} 
+[CFG ]:2506:EEPROM begin success
+[CFG ]:2513:Load EEPROM Data
+[CFG ]:2515:C4DEE2C07574
+*************device_id **************
+
+
+C4DEE2C07574
+----------------------wifi local ip----------------------------
+
+
+----------192.168.0.109----------
+
+----------------------AP ipaddress----------------------------
+
+
+----------192.168.4.1----------
+
+W (2914) wifi:<ba-add>idx:0 (ifx:0, 18:a6:f7:9b:df:7a), tid:0, ssn:0, winSize:64
+********************wifilist*******************
+{"wifilist":["Vipul,-61","🌱C4723D🍀,-63","AUM R&D,-68","JioPrivateNet,-69","Polishing,-78","Moradiya Brothers,-80","BSNL0564,-83",null]}
+---------------------------------------------------------------
+
+
+------------------NTP_FORMATED_TIME : 2023-10-25T16:26:19Z-------------------
+
+
+------------------ epochtime : 1698251179 -------------------
+---------------------------------------------------------------
+*************initial RTC Formatted Time **************
+
+
+--------10-25-2023 16:26:19----------
+
+
+10-25-2023 16:26:19
+*************initial RTC Formatted Time **************
+
+
+--------10-25-2023 16:26:19----------
+
+
+Attempting MQTT connection...
+MQTT Client Connected
+1024
+1024
+Subscribe "C4DEE2C07574/dataset_loc" ok
+Subscribe "C4DEE2C07574/check_request" ok
+Subscribe "C4DEE2C07574/avg_values_master_program" ok
+Subscribe "C4DEE2C07574/termination_request" ok
+Subscribe "C4DEE2C07574/reset_wifi" ok
+Subscribe "C4DEE2C07574/emergency_values" ok
+
+_________________________ device publish : C4DEE2C07574/device_status ________________________________________
+
+Publish "{"device_id":"C4DEE2C07574","first_available":"2023-10-25T16:26:19Z","last_available":"2023-10-25T16:26:19Z"}" ok
+
+Pressure1, Pressure2,  Flow1, Flow2, Flow3, Temp, TDS1, TDS2, TDS3, SLD1, SLD2, SLD3, SLD4, SLD5, SLD6,ROPump, UVTube
+___________update scenario______
+ROpmpON
+uvON
+solenoid - 1 off
+solenoid - 2 off
+solenoid - 3 0n
+solenoid - 4 off
+solenoid - 5 off
+solenoid - 6 on
+Task Name			Status	Prio	HWM	Task#	Affinity
+mqtt_publish_da	R	3	2536	15	0
+loopTask       	X	1	5500	8	1
+IDLE           	R	0	1016	6	1
+IDLE           	R	0	1008	5	0
+tiT            	B	18	2216	10	-1
+ipc0           	B	24	1000	1	0
+ipc1           	B	24	980	2	1
+sys_evt        	B	20	1000	11	0
+arduino_events 	B	19	3216	12	1
+async_tcp      	B	3	15916	14	-1
+esp_timer      	S	22	3344	3	0
+wifi           	B	23	4092	13	0
+Tmr Svc        	B	1	1584	7	0
+
+[16:26:35] PR | 43.54, 99.25,  TMP | 25.00 TDS |2858, 119, 364, TR |3188.17, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:26:45] PR | 59.80, 116.35,  TMP | 25.00 TDS |2858, 177, 370, TR |3204.91, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:26:55] PR | 61.72, 112.18,  TMP | 25.00 TDS |2858, 239, 375, TR |3196.54, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:27:5] PR | 61.80, 121.02,  TMP | 25.00 TDS |2877, 231, 385, TR |3202.12, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:27:15] PR | 61.05, 119.85,  TMP | 25.00 TDS |2858, 207, 405, TR |3207.70, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:27:35] PR | 60.97, 121.35,  TMP | 25.00 TDS |2877, 180, 440, TR |3204.91, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:27:45] PR | 60.22, 121.02,  TMP | 25.00 TDS |2839, 23, 450, TR |3204.91, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:27:55] PR | 60.05, 121.60,  TMP | 25.00 TDS |2858, 166, 458, TR |3210.49, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:28:5] PR | 59.88, 121.18,  TMP | 25.00 TDS |2839, 161, 458, TR |3210.49, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+_________________________ device publish : C4DEE2C07574/device_status ________________________________________
+
+Publish "{"device_id":"C4DEE2C07574","first_available":"2023-10-25T16:26:19Z","last_available":"2023-10-25T16:26:19Z"}" 
+
+
+[16:28:9] 
+_________________________ device publish : C4DEE2C07574/sensor_data ________________________________________
+
+Publish "{"device_id":"C4DEE2C07574","dataset_loc":"development","scenario":"filter_check","sub_scenario":"alk_flush","timestamp":"16:28:10","duration":30000,"pr_1_in":58.71559525,"pr_2_ro":113.2610474,"fs_1_in_p":1294,"fs_1_in_v":1294,"fs_1_in_fr":1294,"fs_2_al_p":47,"fs_2_al_v":47,"fs_2_al_fr":47,"fs_3_wa_p":895,"fs_3_wa_v":895,"fs_3_wa_fr":895,"tr_1_sed_out":3210.490234,"tds_1_in_ro":2839,"tds_2_pu_ro":161,"tds_3_al_out":458,"sv_1_sed_out":false,"sv_2_sed_out":false,"sv_3_sed_out":true,"sv_4_sed_out":false,"sv_5_sed_out":false,"sv_6_sed_out":true,"ro_pump_st":true,"uv_tu_st":true,"leakage_st":0,"hps_st":0}"
+
+
+[16:28:9] 
+_________________________ device publish : C4DEE2C07574/check_response ________________________________________
+
+Publish "{"device_id":"C4DEE2C07574","instance_id":"C4DEE2C075741698251290","action_requestor":31,"completion_status_instance":22,"check_result_subscenario":81,"completion_status_subscenario":22,"dataset_loc":"development","scenario":"filter_check","sub_scenario":"alk_flush","timestamp":"2023-10-25T16:28:10Z","duration":30000,"pr_1_in":161.8154144,"pr_2_ro":323.5195923,"fs_1_in_p":1294,"fs_1_in_v":1294,"fs_1_in_fr":1294,"fs_2_al_p":47,"fs_2_al_v":47,"fs_2_al_fr":47,"fs_3_wa_p":895,"fs_3_wa_v":895,"fs_3_wa_fr":895,"tr_1_sed_out":8003.907389,"tds_1_in_ro":452,"tds_2_pu_ro":452,"tds_3_al_out":452,"sv_1_sed_out":false,"sv_2_sed_out":false,"sv_3_sed_out":true,"sv_4_sed_out":false,"sv_5_sed_out":false,"sv_6_sed_out":true,"ro_pump_st":true,"uv_tu_st":true,"leakage_st":0,"hps_st":0}" 
+
+
+[16:28:9] 
+_________________________ device publish : C4DEE2C07574/emergency_response ________________________________________
+
+Publish "{"device_id":"C4DEE2C07574","timestamp":"2023-10-25T16:28:10Z","emergency_response":{"fs2_check":47,"master_program_termination_code":23,"fs2_recheck":47,"issue_resolved":25,"raise_ticket":41,"last_device_status":"default_off"}}"
+
+
+[16:28:9] 
+_________________________ device publish : C4DEE2C07574/master_program_status ________________________________________
+
+Publish "{"device_id":"C4DEE2C07574","instance_id":"C4DEE2C075741698251290","action_requestor":31,"completion_status_instance":22,"check_result_subscenario":81,"completion_status_subscenario":22,"dataset_loc":"development","scenario":"master_program","sub_scenario":"master_program","timestamp":"2023-10-25T16:28:10Z","duration":30000,"successful_checks":"[1,2,3,4,5,6]","failed_checks":"[]"}" 
+
+
+Message arrived [C4DEE2C07574/avg_values_master_program]:
+
+__________________device received Topic: C4DEE2C07574/avg_values_master_program____________________
+
+{"device_id":"C4DEE2C07574","sed_flush_last_3_instance_avg":42,"carb_flush_last_3_instance_avg":39,"ro_flush_last_3_instance_avg":45,"alk_flush_last_3_instance_avg":36,"tds_3_last_7_days_avg":40,"timestamp":"2023-10-25T13:44:25Z","request_expiry":600} 
+
+
+Message arrived [C4DEE2C07574/dataset_loc]:
+
+__________________device received Topic: C4DEE2C07574/dataset_loc____________________
+
+{"device_id":"C4DEE2C07574","dataset_loc":"staging","timestamp":"2023-10-25T13:44:25Z"} 
+
+Message arrived [C4DEE2C07574/check_request]:
+
+__________________device received Topic: C4DEE2C07574/check_request____________________
+
+{"device_id":"C4DEE2C07574","instance_id":"C4DEE2C075741698241465","action_requestor":31,"check_request":[{"scenario":"filter_check","sub_scenario":"sed_flush","priority":1,"duration":600},{"scenario":"filter_check","sub_scenario":"carb_flush","priority":2,"duration":600},{"scenario":"master_program","sub_scenario":"master_program","priority":3,"duration":"default"}],"timestamp":"2023-08-20'T'13:20:10*633+0000","request_expiry":600} 
+
+
+Message arrived [C4DEE2C07574/reset_wifi]:
+
+__________________device received Topic: C4DEE2C07574/reset_wifi____________________
+
+ {"device_id":"C4DEE2C07574","reset_wifi":21,"action_requestor":31,"timestamp":"2023-10-25T13:44:25Z","request_expiry":600} 
+
+Deleting file: /save_flag_path.txt
+− file deleted
+Writing file: /save_flag_path.txt
+- file written
+
+[16:31:57] PR | 60.22, 120.10,  TMP | 25.00 TDS |2877, 167, 389, TR |3213.28, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:32:7] PR | 59.88, 110.18,  TMP | 25.00 TDS |2820, 224, 390, TR |3210.49, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:32:17] PR | 59.55, 112.26,  TMP | 25.00 TDS |2877, 214, 393, TR |3196.54, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+[16:32:27] PR | 62.64, 111.59,  TMP | 25.00 TDS |2858, 197, 403, TR |3210.49, SL |, 0, 0, 1, 0, 0, 1, PUMP |1, UV |1, 
+
+
+Message arrived [C4DEE2C07574/emergency_values]:
+
+__________________device received Topic: C4DEE2C07574/emergency_values____________________
+
+{"device_id":"C4DEE2C07574","timestamp":"2023-10-25T13:44:25Z","emergency_values":  [{"Sensor":"pressure","pr1_max":70,"pr1_min":30,"pr2_max":120,"pr2_min":120,"pr1_duration":300000,"pr2_duration":300000},  {"Sensor":"flow","fs1_min":100,"fs2_min":50,"fs3_min":250,"fs1_max":1200,"fs2_max":150,"fs3_max":1000,"fs1_duration":300000,"fs2_duration":300000,"f  s3_duration":300000},  {"Sensor":"tds","tds1_min":2800,"tds2_min":200,"tds1_max":120,"tds2_max":300,"tds3_offset":30,"tds1_duration":400,"tds2_duration":300000,"tds3_durat  ion":300000},{"Sensor":"turbidity","turbidity_min":3.54,"turbidity_duration":300000}]} 
+

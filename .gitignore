@@ -1,8 +1,6 @@
 # Dependencies
 node_modules/
 
-# Build folder (you'll copy it from your React app)
-build/
 
 # Environment variables
 .env

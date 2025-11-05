@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Home Page -->
+    <url>
+        <loc>https://muscatwhereto.com/</loc>
+        <lastmod>2024-08-22T18:44:42+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Events Section -->
+    <url>
+        <loc>https://muscatwhereto.com/category/events</loc>
+        <lastmod>2024-08-22T18:44:42+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Eat and Drinks Section -->
+    <url>
+        <loc>https://muscatwhereto.com/category/eat-and-drink</loc>
+        <lastmod>2024-08-22T18:44:42+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Weekly Offers Section -->
+    <url>
+        <loc>https://muscatwhereto.com/category/weekly-offers</loc>
+        <lastmod>2024-08-22T18:44:42+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Staycation Section -->
+    <url>
+        <loc>https://muscatwhereto.com/category/staycation</loc>
+        <lastmod>2024-08-22T18:44:42+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Kids Corner Section -->
+    <url>
+        <loc>https://muscatwhereto.com/category/kids-corner</loc>
+        <lastmod>2024-08-22T18:44:42+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- About Page -->
+    <url>
+        <loc>https://muscatwhereto.com/about-us</loc>
+        <lastmod>2024-08-22T18:44:42+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Contact Page -->
+    <url>
+        <loc>https://muscatwhereto.com/contact-us</loc>
+        <lastmod>2024-08-22T18:44:42+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>
